@@ -1,7 +1,7 @@
 import { SessionManager } from '~/src/server/lib/session-manager.js'
 
-const TASK_LIST = {
-  personalDetails: {
+const TASK_LIST = [
+  {
     sectionTitle: 'Your details',
     tasks: [
       {
@@ -18,7 +18,7 @@ const TASK_LIST = {
       }
     ]
   },
-  businessDetails: {
+  {
     sectionTitle: 'Business details',
     tasks: [
       {
@@ -35,7 +35,7 @@ const TASK_LIST = {
       }
     ]
   }
-}
+]
 
 /**
  * @satisfies {Partial<ServerRoute>}
@@ -68,7 +68,7 @@ export const summaryController = {
       }
 
       // Process tasks and check completion
-      const sections = Object.entries(TASK_LIST).map((section) => ({
+      const sections = TASK_LIST.map((section) => ({
         sectionTitle: section.sectionTitle,
         tasks: section.tasks.map((task) => ({
           ...task,
