@@ -1,0 +1,49 @@
+{% extends 'layouts/page.njk' %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/tag/macro.njk" import govukTag %}
+
+{% block content %}
+  {{ appHeading({
+    text: heading
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <ol class="govuk-task-list">
+        {% for section in sections %}
+          <li>
+            <h2 class="govuk-task-list__section">
+              <span class="govuk-task-list__section-number">{{ loop.index }}. </span>{{ section.sectionTitle }}
+            </h2>
+            <ul class="govuk-task-list__items">
+              {% for task in section.tasks %}
+                <li class="govuk-task-list__item">
+                  <span class="govuk-task-list__task-name">
+                    <a href="{{ task.path }}" class="govuk-link">
+                      {{ task.title }}
+                    </a>
+                  </span>
+                  {{ govukTag({
+                    text: "Completed" if task.isComplete else "Not started",
+                    classes: "govuk-task-list__tag " + ("govuk-tag--green" if task.isComplete else "govuk-tag--grey")
+                  }) }}
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
+        {% endfor %}
+      </ol>
+
+      {% if isComplete %}
+        {{ govukButton({
+          text: "Complete application",
+          href: "/applicant/complete",
+          attributes: {
+            "data-testid": "complete"
+          }
+        }) }}
+      {% endif %}
+    </div>
+  </div>
+{% endblock %} 

@@ -1,0 +1,91 @@
+{% extends 'layouts/page.njk' %}
+
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  {{ appHeading({
+    text: heading
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form method="POST" action="/applicant/business/address" novalidate>
+        {{ govukInput({
+          label: {
+            text: "Building and street",
+            classes: "govuk-label--s"
+          },
+          id: "address-line-1",
+          name: "addressLine1",
+          value: addressLine1,
+          errorMessage: errors.addressLine1 and {
+            text: errors.addressLine1.text
+          }
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Building and street line 2",
+            classes: "govuk-label--s"
+          },
+          id: "address-line-2",
+          name: "addressLine2",
+          value: addressLine2,
+          errorMessage: errors.addressLine2 and {
+            text: errors.addressLine2.text
+          }
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Town or city",
+            classes: "govuk-label--s"
+          },
+          classes: "govuk-!-width-two-thirds",
+          id: "address-town",
+          name: "addressTown",
+          value: addressTown,
+          errorMessage: errors.addressTown and {
+            text: errors.addressTown.text
+          }
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "County",
+            classes: "govuk-label--s"
+          },
+          classes: "govuk-!-width-two-thirds",
+          id: "address-county",
+          name: "addressCounty",
+          value: addressCounty,
+          errorMessage: errors.addressCounty and {
+            text: errors.addressCounty.text
+          }
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Postcode",
+            classes: "govuk-label--s"
+          },
+          classes: "govuk-input--width-10",
+          id: "address-postcode",
+          name: "addressPostcode",
+          value: addressPostcode,
+          errorMessage: errors.addressPostcode and {
+            text: errors.addressPostcode.text
+          }
+        }) }}
+
+        {{ govukButton({
+          text: "Continue",
+          attributes: {
+            "data-testid": "submit"
+          }
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %} 

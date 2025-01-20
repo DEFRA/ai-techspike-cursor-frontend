@@ -5,6 +5,7 @@
  */
 export const homeController = {
   handler(_request, h) {
+    _request.yar.reset()
     return h.view('home/index', {
       pageTitle: 'Home',
       heading: 'Home'

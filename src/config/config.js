@@ -203,6 +203,18 @@ export const config = convict({
       env: 'REDIS_TLS'
     }
   }),
+  notifyApiKey: {
+    doc: 'Notify API key',
+    format: String,
+    default: '',
+    env: 'NOTIFY_API_KEY'
+  },
+  notifyTemplateId: {
+    doc: 'Notify template ID',
+    format: String,
+    default: '',
+    env: 'NOTIFY_TEMPLATE_ID'
+  },
   nunjucks: {
     watch: {
       doc: 'Reload templates when they are changed.',

@@ -1,0 +1,37 @@
+{% extends 'layouts/page.njk' %}
+
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  {{ appHeading({
+    text: heading
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form method="POST" action="/applicant/business/name" novalidate>
+        {{ govukInput({
+          label: {
+            text: "What is your business name?",
+            classes: "govuk-label--l",
+            isPageHeading: false
+          },
+          id: "business-name",
+          name: "businessName",
+          value: businessName,
+          errorMessage: errors.businessName and {
+            text: errors.businessName.text
+          }
+        }) }}
+
+        {{ govukButton({
+          text: "Continue",
+          attributes: {
+            "data-testid": "submit"
+          }
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %} 
