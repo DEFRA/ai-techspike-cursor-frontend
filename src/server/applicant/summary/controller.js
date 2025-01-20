@@ -68,17 +68,17 @@ export const summaryController = {
       }
 
       // Process tasks and check completion
-      const sections = Object.entries(TASK_LIST).map(([_, section]) => ({
+      const sections = Object.entries(TASK_LIST).map((section) => ({
         sectionTitle: section.sectionTitle,
-        tasks: section.tasks.map(task => ({
+        tasks: section.tasks.map((task) => ({
           ...task,
           isComplete: Boolean(session.get(task.sessionPath))
         }))
       }))
 
       // Check if all tasks are completed
-      const isComplete = sections.every(section => 
-        section.tasks.every(task => task.isComplete)
+      const isComplete = sections.every((section) =>
+        section.tasks.every((task) => task.isComplete)
       )
 
       return h.view('applicant/summary/index', {
