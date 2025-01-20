@@ -10,6 +10,7 @@ import { businessAddress } from '~/src/server/applicant/business/address/index.j
 import { businessName } from '~/src/server/applicant/business/name/index.js'
 import { summary } from '~/src/server/applicant/summary/index.js'
 import { complete } from '~/src/server/applicant/complete/index.js'
+import { search } from '~/src/server/applicant/search/index.js'
 
 /**
  * @satisfies {ServerRegisterPluginObject<void>}
@@ -32,7 +33,8 @@ export const router = {
         businessAddress,
         businessName,
         summary,
-        complete
+        complete,
+        search
       ])
 
       // Static assets

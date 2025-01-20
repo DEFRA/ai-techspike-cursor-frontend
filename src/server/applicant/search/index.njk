@@ -1,0 +1,77 @@
+{% extends 'layouts/page.njk' %}
+
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/table/macro.njk" import govukTable %}
+
+{% block content %}
+  {{ appHeading({
+    text: heading
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form method="POST" action="/applicant/search" novalidate>
+        {{ govukInput({
+          label: {
+            text: "Search by reference number",
+            classes: "govuk-label--l",
+            isPageHeading: false
+          },
+          id: "reference-number",
+          name: "referenceNumber",
+          value: referenceNumber,
+          errorMessage: errors.referenceNumber and {
+            text: errors.referenceNumber.text
+          }
+        }) }}
+
+        {{ govukButton({
+          text: "Search",
+          attributes: {
+            "data-testid": "search"
+          }
+        }) }}
+      </form>
+
+      {% if searchResult %}
+        <h2 class="govuk-heading-m">Search results</h2>
+        {{ govukTable({
+          firstCellIsHeader: true,
+          rows: [
+            [
+              { text: "Reference number" },
+              { text: searchResult.referenceNumber }
+            ],
+            [
+              { text: "Name" },
+              { text: searchResult.applicant.name }
+            ],
+            [
+              { text: "Email" },
+              { text: searchResult.applicant.email }
+            ],
+            [
+              { text: "Business name" },
+              { text: searchResult.applicant.business.name }
+            ],
+            [
+              { text: "Business address" },
+              { text: [
+                searchResult.applicant.business.address.addressLine1,
+                searchResult.applicant.business.address.addressLine2,
+                searchResult.applicant.business.address.addressTown,
+                searchResult.applicant.business.address.addressCounty,
+                searchResult.applicant.business.address.addressPostcode
+              ] | join(", ") }
+            ],
+            [
+              { text: "Submitted" },
+              { text: searchResult.submittedAt | formatDate }
+            ]
+          ]
+        }) }}
+      {% endif %}
+    </div>
+  </div>
+{% endblock %} 

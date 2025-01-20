@@ -215,6 +215,12 @@ export const config = convict({
     default: '',
     env: 'NOTIFY_TEMPLATE_ID'
   },
+  backendUrl: {
+    doc: 'Backend URL',
+    format: String,
+    default: 'http://localhost:3001',
+    env: 'BACKEND_URL'
+  },
   nunjucks: {
     watch: {
       doc: 'Reload templates when they are changed.',
