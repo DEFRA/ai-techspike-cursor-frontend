@@ -9,9 +9,9 @@ export function buildNavigation(request) {
       isActive: request?.path === '/'
     },
     {
-      text: 'About',
-      url: '/about',
-      isActive: request?.path === '/about'
+      text: 'Search',
+      url: '/applicant/search',
+      isActive: request?.path === '/applicant/search'
     }
   ]
 }
