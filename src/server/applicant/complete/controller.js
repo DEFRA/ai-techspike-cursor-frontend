@@ -38,8 +38,6 @@ export const completeController = {
           submittedAt: new Date().toISOString()
         }
 
-        console.log(applicationData)
-
         try {
           // Submit application using proxy helper
           const response = await proxyFetch(

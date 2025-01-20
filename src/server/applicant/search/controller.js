@@ -1,6 +1,5 @@
 import Joi from 'joi'
 import { proxyFetch } from '~/src/server/common/helpers/proxy.js'
-import { statusCodes } from '~/src/server/common/constants/status-codes.js'
 import { config } from '~/src/config/config.js'
 
 const schema = Joi.object({
