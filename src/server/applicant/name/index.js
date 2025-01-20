@@ -26,4 +26,4 @@ export const applicant = {
 
 /**
  * @import { ServerRegisterPluginObject } from '@hapi/hapi'
- */ 
+ */

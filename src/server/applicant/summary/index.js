@@ -1,9 +1,5 @@
 import { summaryController } from '~/src/server/applicant/summary/controller.js'
 
-/**
- * Sets up the routes for the summary page.
- * @satisfies {ServerRegisterPluginObject<void>}
- */
 export const summary = {
   plugin: {
     name: 'summary',
@@ -18,7 +14,3 @@ export const summary = {
     }
   }
 }
-
-/**
- * @import { ServerRegisterPluginObject } from '@hapi/hapi'
- */ 

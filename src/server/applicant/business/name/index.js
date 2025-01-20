@@ -26,4 +26,4 @@ export const businessName = {
 
 /**
  * @import { ServerRegisterPluginObject } from '@hapi/hapi'
- */ 
+ */

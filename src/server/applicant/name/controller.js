@@ -10,9 +10,6 @@ const schema = Joi.object({
   })
 })
 
-/**
- * @satisfies {Partial<ServerRoute>}
- */
 export const applicantController = {
   get: {
     handler: (request, h) => {
@@ -28,11 +25,14 @@ export const applicantController = {
     }
   },
   post: {
-    handler: async (request, h) => {
+    handler: (request, h) => {
       const { applicantName } = request.payload
       const session = new SessionManager(request)
 
-      const { error } = schema.validate({ applicantName }, { abortEarly: false })
+      const { error } = schema.validate(
+        { applicantName },
+        { abortEarly: false }
+      )
 
       if (error) {
         return h
@@ -54,7 +54,3 @@ export const applicantController = {
     }
   }
 }
-
-/**
- * @import { ServerRoute } from '@hapi/hapi'
- */ 

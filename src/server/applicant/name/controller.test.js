@@ -90,4 +90,4 @@ describe('#applicantController', () => {
 
 /**
  * @import { Server } from '@hapi/hapi'
- */ 
+ */

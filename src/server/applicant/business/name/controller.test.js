@@ -96,4 +96,4 @@ describe('#businessNameController', () => {
 
 /**
  * @import { Server } from '@hapi/hapi'
- */ 
+ */

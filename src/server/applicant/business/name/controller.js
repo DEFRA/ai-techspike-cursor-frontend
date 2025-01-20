@@ -28,7 +28,7 @@ export const businessNameController = {
     }
   },
   post: {
-    handler: async (request, h) => {
+    handler: (request, h) => {
       const { businessName } = request.payload
       const session = new SessionManager(request)
 
@@ -57,4 +57,4 @@ export const businessNameController = {
 
 /**
  * @import { ServerRoute } from '@hapi/hapi'
- */ 
+ */

@@ -17,10 +17,13 @@ const schema = Joi.object({
   addressCounty: Joi.string().allow('').max(100).messages({
     'string.max': 'County must be 100 characters or fewer'
   }),
-  addressPostcode: Joi.string().required().pattern(/^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$/i).messages({
-    'string.empty': 'Enter a postcode',
-    'string.pattern.base': 'Enter a real postcode'
-  })
+  addressPostcode: Joi.string()
+    .required()
+    .pattern(/^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$/i)
+    .messages({
+      'string.empty': 'Enter a postcode',
+      'string.pattern.base': 'Enter a real postcode'
+    })
 })
 
 /**
@@ -30,12 +33,20 @@ export const businessAddressController = {
   get: {
     handler: (request, h) => {
       const session = new SessionManager(request)
-      
-      const addressLine1 = session.get('applicant.business.address.addressLine1')
-      const addressLine2 = session.get('applicant.business.address.addressLine2')
+
+      const addressLine1 = session.get(
+        'applicant.business.address.addressLine1'
+      )
+      const addressLine2 = session.get(
+        'applicant.business.address.addressLine2'
+      )
       const addressTown = session.get('applicant.business.address.addressTown')
-      const addressCounty = session.get('applicant.business.address.addressCounty')
-      const addressPostcode = session.get('applicant.business.address.addressPostcode')
+      const addressCounty = session.get(
+        'applicant.business.address.addressCounty'
+      )
+      const addressPostcode = session.get(
+        'applicant.business.address.addressPostcode'
+      )
 
       return h.view('applicant/business/address/index', {
         pageTitle: 'Business address',
@@ -50,7 +61,7 @@ export const businessAddressController = {
     }
   },
   post: {
-    handler: async (request, h) => {
+    handler: (request, h) => {
       const payload = request.payload
       const session = new SessionManager(request)
 
@@ -84,4 +95,4 @@ export const businessAddressController = {
 
 /**
  * @import { ServerRoute } from '@hapi/hapi'
- */ 
+ */

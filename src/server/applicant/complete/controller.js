@@ -9,7 +9,7 @@ export const completeController = {
   get: {
     handler: async (request, h) => {
       const session = new SessionManager(request)
-      
+
       // Get application details
       const applicantName = session.get('applicant.name')
       const applicantEmail = session.get('applicant.email')
@@ -30,7 +30,10 @@ export const completeController = {
           })
         } catch (err) {
           // Log error but don't fail the request
-          request.log('error', `Failed to send confirmation email: ${err.message}`)
+          request.log(
+            'error',
+            `Failed to send confirmation email: ${err.message}`
+          )
         }
       }
 
@@ -47,4 +50,4 @@ export const completeController = {
 
 /**
  * @import { ServerRoute } from '@hapi/hapi'
- */ 
+ */

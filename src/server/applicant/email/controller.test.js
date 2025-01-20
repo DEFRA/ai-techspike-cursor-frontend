@@ -90,4 +90,4 @@ describe('#emailController', () => {
 
 /**
  * @import { Server } from '@hapi/hapi'
- */ 
+ */

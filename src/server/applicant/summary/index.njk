@@ -24,10 +24,11 @@
                       {{ task.title }}
                     </a>
                   </span>
-                  {{ govukTag({
-                    text: "Completed" if task.isComplete else "Not started",
-                    classes: "govuk-task-list__tag " + ("govuk-tag--green" if task.isComplete else "govuk-tag--grey")
-                  }) }}
+                  <div class="govuk-task-list__status" id="{{ task.id }}-status">
+                    <strong class="govuk-tag {% if task.isComplete %}govuk-tag--green{% else %}govuk-tag--grey{% endif %}">
+                      {% if task.isComplete %}Completed{% else %}Not started{% endif %}
+                    </strong>
+                  </div>
                 </li>
               {% endfor %}
             </ul>

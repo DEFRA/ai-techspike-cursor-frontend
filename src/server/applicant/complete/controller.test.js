@@ -57,7 +57,9 @@ describe('#completeController', () => {
     })
 
     test('Should send confirmation email on first visit', async () => {
-      sendConfirmationEmail.mockResolvedValueOnce({ id: 'test-notification-id' })
+      sendConfirmationEmail.mockResolvedValueOnce({
+        id: 'test-notification-id'
+      })
 
       await server.inject({
         method: 'GET',
@@ -132,4 +134,4 @@ describe('#completeController', () => {
 
 /**
  * @import { Server } from '@hapi/hapi'
- */ 
+ */

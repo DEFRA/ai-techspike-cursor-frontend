@@ -28,11 +28,14 @@ export const emailController = {
     }
   },
   post: {
-    handler: async (request, h) => {
+    handler: (request, h) => {
       const { applicantEmail } = request.payload
       const session = new SessionManager(request)
 
-      const { error } = schema.validate({ applicantEmail }, { abortEarly: false })
+      const { error } = schema.validate(
+        { applicantEmail },
+        { abortEarly: false }
+      )
 
       if (error) {
         return h
@@ -57,4 +60,4 @@ export const emailController = {
 
 /**
  * @import { ServerRoute } from '@hapi/hapi'
- */ 
+ */

@@ -1,49 +1,13 @@
-/**
- * @typedef {Object} BusinessAddress
- * @property {string} addressLine1
- * @property {string} addressLine2
- * @property {string} addressTown
- * @property {string} addressCounty
- * @property {string} addressPostcode
- */
-
-/**
- * @typedef {Object} Business
- * @property {BusinessAddress} address
- */
-
-/**
- * @typedef {Object} Applicant
- * @property {string} name
- * @property {string} email
- * @property {Business} business
- */
-
-/**
- * @typedef {Object} SessionData
- * @property {Applicant} applicant
- */
-
 export class SessionManager {
   constructor(request) {
     this.request = request
   }
 
-  /**
-   * Gets a value from the session using dot notation path
-   * @param {string} path - Dot notation path e.g. 'applicant.name'
-   * @returns {any} Value from session or empty string if not found
-   */
   get(path) {
     const sessionData = this.request.yar?.get('sessionData') || {}
-    return path.split('.').reduce((obj, key) => (obj?.[key] ?? ''), sessionData)
+    return path.split('.').reduce((obj, key) => obj?.[key] ?? '', sessionData)
   }
 
-  /**
-   * Sets a value in the session using dot notation path
-   * @param {string} path - Dot notation path e.g. 'applicant.name'
-   * @param {any} value - Value to set
-   */
   set(path, value) {
     const sessionData = this.request.yar?.get('sessionData') || {}
     const keys = path.split('.')
@@ -63,4 +27,4 @@ export class SessionManager {
   getAll() {
     return this.request.yar?.get('sessionData') || {}
   }
-} 
+}

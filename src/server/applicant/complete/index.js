@@ -21,4 +21,4 @@ export const complete = {
 
 /**
  * @import { ServerRegisterPluginObject } from '@hapi/hapi'
- */ 
+ */

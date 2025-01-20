@@ -47,7 +47,7 @@ describe('#businessAddressController', () => {
       })
 
       expect(statusCode).toBe(statusCodes.ok)
-      Object.values(testAddress).forEach(value => {
+      Object.values(testAddress).forEach((value) => {
         expect(result).toContain(value)
       })
     })
@@ -113,4 +113,4 @@ describe('#businessAddressController', () => {
 
 /**
  * @import { Server } from '@hapi/hapi'
- */ 
+ */

@@ -84,7 +84,7 @@ describe('#summaryController', () => {
         '/applicant/business/address'
       ]
 
-      expectedPaths.forEach(path => {
+      expectedPaths.forEach((path) => {
         expect(result).toContain(`href="${path}"`)
       })
     })
@@ -123,7 +123,3 @@ describe('#summaryController', () => {
     })
   })
 })
-
-/**
- * @import { Server } from '@hapi/hapi'
- */ 

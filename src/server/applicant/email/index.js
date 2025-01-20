@@ -26,4 +26,4 @@ export const email = {
 
 /**
  * @import { ServerRegisterPluginObject } from '@hapi/hapi'
- */ 
+ */
