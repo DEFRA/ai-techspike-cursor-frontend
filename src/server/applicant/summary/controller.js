@@ -37,13 +37,17 @@ const TASK_LIST = {
   }
 }
 
+/**
+ * @satisfies {Partial<ServerRoute>}
+ */
 export const summaryController = {
   get: {
     handler: (request, h) => {
       const session = new SessionManager(request)
       const sessionData = session.getAll()
 
-      session.set('applicant', {
+      // Initialize with empty structure if no data exists
+      const defaultApplicant = {
         name: '',
         email: '',
         business: {
@@ -55,22 +59,26 @@ export const summaryController = {
             addressCounty: '',
             addressPostcode: ''
           }
-        },
-        ...sessionData.applicant
-      })
+        }
+      }
+
+      // Ensure applicant exists in session
+      if (!sessionData.applicant) {
+        session.set('applicant', defaultApplicant)
+      }
 
       // Process tasks and check completion
-      const sections = Object.entries(TASK_LIST).map((section) => ({
-        ...section,
-        tasks: section.tasks.map((task) => ({
+      const sections = Object.entries(TASK_LIST).map(([_, section]) => ({
+        sectionTitle: section.sectionTitle,
+        tasks: section.tasks.map(task => ({
           ...task,
           isComplete: Boolean(session.get(task.sessionPath))
         }))
       }))
 
       // Check if all tasks are completed
-      const isComplete = sections.every((section) =>
-        section.tasks.every((task) => task.isComplete)
+      const isComplete = sections.every(section => 
+        section.tasks.every(task => task.isComplete)
       )
 
       return h.view('applicant/summary/index', {
@@ -82,3 +90,7 @@ export const summaryController = {
     }
   }
 }
+
+/**
+ * @import { ServerRoute } from '@hapi/hapi'
+ */
