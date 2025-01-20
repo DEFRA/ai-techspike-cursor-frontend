@@ -3,6 +3,9 @@ import { generateReference } from '~/src/server/lib/reference-generator.js'
 import { sendConfirmationEmail } from '~/src/server/lib/notify.js'
 import { proxyFetch } from '~/src/server/common/helpers/proxy.js'
 import { config } from '~/src/config/config.js'
+import { createLogger } from '~/src/server/common/helpers/logging/logger.js'
+
+const log = createLogger()
 
 /**
  * @satisfies {Partial<ServerRoute>}
@@ -54,7 +57,11 @@ export const completeController = {
           if (!response.ok) {
             throw new Error(`API responded with status: ${response.status}`)
           }
+        } catch (err) {
+          log.error(`Failed to save application: ${err.message}`)
+        }
 
+        try {
           // Send confirmation email only after successful submission
           await sendConfirmationEmail(applicantEmail, {
             applicantName,
@@ -62,8 +69,7 @@ export const completeController = {
             referenceNumber
           })
         } catch (err) {
-          // Log error but don't fail the request
-          request.log('error', `Failed to process application: ${err.message}`)
+          log.error(`Failed to send email for application: ${err.message}`)
         }
       }
 
